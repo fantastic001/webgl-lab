@@ -30,7 +30,7 @@ function drawCube(gl, context, x0, y0, z0, a, b, c, anglex, angley, cube_attrs) 
 
 	setAttributes(gl, cube_attrs, context.vPosition, context.vertColor);
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cube_attrs.indxBuffer);
-  var rotationMat = mult(rotate(anglex, 1, 0, 0), rotate(angley, 0, 1, 0));
+  var rotationMat = mult(rotate(angley, 0, 1, 0), rotate(anglex, 1, 0, 0));
   var TR = mult(translate(x0, y0, z0), rotationMat);
 
 	var modelMat = mult(TR, scalem(a,b,c));
@@ -43,7 +43,7 @@ function drawCylinder(gl, context, x0, y0, z0, a, h, anglex, angley, cylinder_at
 	setAttributes(gl, cylinder_attrs, context.vPosition, context.vertColor);
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cylinder_attrs.indxBuffer);
 
-  var rotationMat = mult(rotate(anglex, 1, 0, 0), rotate(angley, 0, 1, 0));
+  var rotationMat = mult(rotate(angley, 0, 1, 0), rotate(anglex, 1, 0, 0));
   var TR = mult(translate(x0, y0, z0), rotationMat);
 
 	var modelMat = mult(TR, scalem(a,h,a));
