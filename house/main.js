@@ -163,7 +163,7 @@ function render() {
 	gl.uniformMatrix4fv(modelTLoc, false, flatten(modelMat));
 	gl.drawElements(cube.primtype, cube.nIndices, gl.UNSIGNED_SHORT, 0);
   */
-  drawCube(gl, context, 0, 10, 0, 10, 10, 10, house);
+  drawCube(gl, context, 0, 10, 0, 10, 10, 10, 0, 0, house);
 	
   /////grid
 	
@@ -210,10 +210,10 @@ function render() {
   //drawCone(gl, context, 30, 20, 30, 10, 10, pyramid);
   //drawCone(gl, context, 30, 30, 30, 10, 10, pyramid);
 
-  drawCylinder(gl, context, 50, 0, 50, 3, 25, cylinder);
+  drawCylinder(gl, context, 50, 0, 50, 3, 50, 0, 0, cylinder);
   
   // draw terrain 
-  drawCube(gl, context, 0, 0, 0, 1000, 0, 1000, terrain); 
+  drawCube(gl, context, 0, 0, 0, 1000, 0, 1000, 0, 0, terrain); 
 
   requestAnimFrame( render );
 }

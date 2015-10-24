@@ -26,20 +26,27 @@ function createContext(gl)
   };
 }
 
-function drawCube(gl, context, x0, y0, z0, a, b, c, cube_attrs) {
+function drawCube(gl, context, x0, y0, z0, a, b, c, anglex, angley, cube_attrs) {
 
 	setAttributes(gl, cube_attrs, context.vPosition, context.vertColor);
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cube_attrs.indxBuffer);
-	var modelMat = mult(translate(x0, y0, z0), scalem(a,b,c));
+  var rotationMat = mult(rotate(anglex, 1, 0, 0), rotate(angley, 0, 1, 0));
+  var TR = mult(translate(x0, y0, z0), rotationMat);
+
+	var modelMat = mult(TR, scalem(a,b,c));
 	gl.uniformMatrix4fv(context.model, false, flatten(modelMat));
 	gl.drawElements(cube_attrs.primtype, cube_attrs.nIndices, gl.UNSIGNED_SHORT, 0);
 }
 
-function drawCylinder(gl, context, x0, y0, z0, a, h, cylinder_attrs) {
+function drawCylinder(gl, context, x0, y0, z0, a, h, anglex, angley, cylinder_attrs) {
 
 	setAttributes(gl, cylinder_attrs, context.vPosition, context.vertColor);
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cylinder_attrs.indxBuffer);
-	var modelMat = mult(translate(x0, y0, z0), scalem(a,h,a));
+
+  var rotationMat = mult(rotate(anglex, 1, 0, 0), rotate(angley, 0, 1, 0));
+  var TR = mult(translate(x0, y0, z0), rotationMat);
+
+	var modelMat = mult(TR, scalem(a,h,a));
 	gl.uniformMatrix4fv(context.model, false, flatten(modelMat));
 	gl.drawElements(cylinder_attrs.primtype, cylinder_attrs.nIndices, gl.UNSIGNED_SHORT, 0);
 }
